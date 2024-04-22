@@ -5,8 +5,9 @@ import userRoutes from "./routes/user.routes.js";
 import messageRoutes from "./routes/message.routes.js";
 import connectToMongoDB from "./db/connectToMongoDB.js";
 import cookieParser from "cookie-parser";
+import {app, server} from './socket/socket.js'
 
-const app = express();
+
 
 configDotenv();
 
@@ -26,7 +27,7 @@ app.use("/api/users", userRoutes);
 
 
 
-app.listen(process.env.PORT,() => {
+server.listen(process.env.PORT,() => {
     connectToMongoDB();
     console.log("http://localhost:5000/");
 })
