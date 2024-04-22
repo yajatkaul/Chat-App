@@ -2,7 +2,7 @@ import { useEffect , useState } from 'react'
 import useConversation from '../zustand/useConversation'
 
 const useGetMessages = () => {
-  const [loading,setLoading] = useState(false)
+  const [loading,setLoding] = useState(false)
   const {messages,setMessages,selectedConversation} = useConversation()
 
   useEffect(() => {
@@ -18,7 +18,7 @@ const useGetMessages = () => {
         }catch (err){
             toast.error(err.message)
         }finally{
-            setLoading(false);
+            setLoding(false);
         }
     }
 
