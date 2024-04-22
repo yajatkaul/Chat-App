@@ -1,5 +1,6 @@
 import Conversation from "../models/conversation.model.js"
 import Message from "../models/message.model.js"
+import { getReciverSocketId } from "../socket/socket.js";
 
 export const sendMessage = async (req,res) => {
     try{
@@ -28,10 +29,16 @@ export const sendMessage = async (req,res) => {
         if(newMessage){
             conversion.messages.push(newMessage._id);
         }
+        
+        await Promise.all([conversion.save(),newMessage.save()]) //Runs in parallel
 
         //Websockets Here
+        const reciverSocketId = getReciverSocketId(reciverId);
+        if(reciverSocketId){
+            //send to specific client
+            io.to(reciverSocketId).emit("newMessage",newMessage)
+        }
 
-        await Promise.all([conversion.save(),newMessage.save()]) //Runs in parallel
 
         res.status(201).json(newMessage);
     }
