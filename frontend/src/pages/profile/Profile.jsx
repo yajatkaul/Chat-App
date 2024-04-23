@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import NavBar from '../../components/navigator/NavBar';
 import { useAuthContext } from '../../context/AuthContext';
-import toast from 'react-hot-toast';
 
 const Profile = () => {
   const { authUser } = useAuthContext();
@@ -23,8 +22,8 @@ const Profile = () => {
   return (
     <>    
       <NavBar />
-      <div className='flex sm:h-[450px] md:h-[550px] rounded-lg overflow-hidden bg-gray-400 bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-0'>
-        <div>
+      <div className='flex sm:h-[450px] md:h-[150px] rounded-lg overflow-hidden bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-0'>
+        <div className='mt-[35px]'>
           {/* Render the file input */}
           <input 
             type="file" 
@@ -49,6 +48,11 @@ const Profile = () => {
           >
             {/* No text content */}
           </label>
+        </div>
+        <div className='ml-[100px] flex flex-col mr-[50px] mt-[35px]'>
+            <p>{`Username: ${authUser.username}`}</p>
+            <p>{`Display Name: ${authUser.fullName}`}</p>
+            <p>{`Gender: ${authUser.gender}`}</p>
         </div>
       </div>
     </>
