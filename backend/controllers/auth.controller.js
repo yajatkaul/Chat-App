@@ -10,6 +10,14 @@ export const signupuser = async (req,res) => {
             return res.status(400).json({err:"Passwords don't match"})
         }
 
+        if(username.length < 6){
+            return res.status(400).json({err:"Username should be longer than 6"})
+        }
+
+        if(fullName.length < 6){
+            return res.status(400).json({err:"Name should be longer than 6"})
+        }
+
 
         const user = await User.findOne({username})
 

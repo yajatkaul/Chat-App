@@ -58,5 +58,6 @@ function handleInputErrors({fullName,username,password,confirmPassword,gender}){
         return false;
     }
 
+
     return true;
 }
